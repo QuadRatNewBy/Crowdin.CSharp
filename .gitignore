@@ -1,0 +1,9 @@
+*.suo
+OneSky.CSharp/OneSky.CSharp/bin/
+OneSky.CSharp/OneSky.CSharp/obj/
+/OneSky.CSharp/OneSky.CSharp/*.DotSettings
+OneSky.CSharp/OneSky.CSharp.Tests/obj/
+OneSky.CSharp/OneSky.CSharp.Tests/bin/
+OneSky.CSharp/packages/
+*.coverage
+/OneSky.CSharp/*.user
