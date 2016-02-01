@@ -1,9 +1,9 @@
 *.suo
-OneSky.CSharp/OneSky.CSharp/bin/
-OneSky.CSharp/OneSky.CSharp/obj/
-/OneSky.CSharp/OneSky.CSharp/*.DotSettings
-OneSky.CSharp/OneSky.CSharp.Tests/obj/
-OneSky.CSharp/OneSky.CSharp.Tests/bin/
-OneSky.CSharp/packages/
+Crowdin.CSharp/Crowdin.CSharp/bin/
+Crowdin.CSharp/Crowdin.CSharp/obj/
+/Crowdin.CSharp/Crowdin.CSharp/*.DotSettings
+Crowdin.CSharp/Crowdin.CSharp.Tests/obj/
+Crowdin.CSharp/Crowdin.CSharp.Tests/bin/
+Crowdin.CSharp/packages/
 *.coverage
-/OneSky.CSharp/*.user
+/Crowdin.CSharp/*.user
