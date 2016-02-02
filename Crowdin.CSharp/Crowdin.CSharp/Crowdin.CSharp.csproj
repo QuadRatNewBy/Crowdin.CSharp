@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountClient.cs" />
     <Compile Include="AnonymousClient.cs" />
     <Compile Include="CrowdinClient.cs" />
+    <Compile Include="CrowdinHelperAccount.cs" />
     <Compile Include="CrowdinHelperAnonymous.cs" />
     <Compile Include="CrowdinRequest.cs" />
     <Compile Include="CrowdinResponse.cs" />

@@ -2,7 +2,7 @@
 {
     internal class AnonymousClient : IAnonymousClient
     {
-        private const string SupportedLanguageAdress = "https://api.crowdin.com/api/supported-languages";
+        private const string SupportedLanguageAddress = "https://api.crowdin.com/api/supported-languages";
 
         private ICrowdinHelper helper;
 
@@ -13,7 +13,7 @@
 
         public ICrowdinResponse SupportedLanguages(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null)
         {
-            var request = this.helper.CreateRequest(SupportedLanguageAdress, type, callback);
+            var request = this.helper.CreateRequest(SupportedLanguageAddress, type, callback);
             return request.Get();
         }
     }

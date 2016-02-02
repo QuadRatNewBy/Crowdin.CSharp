@@ -1,10 +1,23 @@
 ﻿namespace Crowdin.CSharp
 {
-    public interface IAccountClient
+    internal class AccountClient : IAccountClient
     {
-        ICrowdinResponse Projects(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null);
+        private const string AccountProjectsAddress = "https://api.crowdin.com/api/account/get-projects?account-key={account-key}&login={crowdin username}";
+    
+        private ICrowdinHelper helper;
 
-        ICrowdinResponse CreateProject(
+        public AccountClient(ICrowdinHelper helper)
+        {
+            this.helper = helper;
+        }
+
+        public ICrowdinResponse Projects(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null)
+        {
+            var request = this.helper.CreateRequest(AccountProjectsAddress, type, callback);
+            return request.Post();
+        }
+
+        public ICrowdinResponse CreateProject(
             string name,
             string identifier,
             string source_language,
@@ -27,6 +40,9 @@
             string webhook_project_translated = null,
             string webhook_project_proofread = null,
             CrowdinResponseType type = CrowdinResponseType.Xml,
-            string callback = null);
+            string callback = null)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

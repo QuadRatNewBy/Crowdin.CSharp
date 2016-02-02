@@ -16,5 +16,10 @@
         {
             anonymous = new AnonymousClient(new CrowdinHelperAnonymous());
         }
+
+        public static IAccountClient CreateAccountClient(string userName, string accountKey)
+        {
+            return new AccountClient(new CrowdinHelperAccount(userName, accountKey));
+        }
     }
 }

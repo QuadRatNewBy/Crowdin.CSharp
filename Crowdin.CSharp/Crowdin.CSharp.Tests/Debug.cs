@@ -9,8 +9,9 @@
         [Fact]
         public void Start()
         {
-            var j = CrowdinClient.Anonymous.SupportedLanguages(CrowdinResponseType.Json);
-            var jp = CrowdinClient.Anonymous.SupportedLanguages(CrowdinResponseType.Jsonp);
+            var ac = CrowdinClient.CreateAccountClient(Settings.UserName, Settings.AccountKey);
+            var j = ac.Projects();
+            var jp = ac.Projects(CrowdinResponseType.Json);
         }
     }
 }

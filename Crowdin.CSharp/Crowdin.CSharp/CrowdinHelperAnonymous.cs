@@ -2,7 +2,7 @@
 {
     internal class CrowdinHelperAnonymous : ICrowdinHelper
     {
-        public ICrowdinRequest CreateRequest(string url, CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null)
+        public virtual ICrowdinRequest CreateRequest(string url, CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null)
         {
             var req = new CrowdinRequest(url);
 
