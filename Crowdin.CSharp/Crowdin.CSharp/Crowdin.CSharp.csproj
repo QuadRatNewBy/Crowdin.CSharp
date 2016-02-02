@@ -40,6 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousClient.cs" />
+    <Compile Include="CrowdinClient.cs" />
+    <Compile Include="CrowdinHelperAnonymous.cs" />
+    <Compile Include="CrowdinRequest.cs" />
+    <Compile Include="CrowdinResponse.cs" />
+    <Compile Include="CrowdinResponseType.cs" />
+    <Compile Include="IAccountClient.cs" />
+    <Compile Include="IAnonymousClient.cs" />
+    <Compile Include="ICrowdinHelper.cs" />
+    <Compile Include="ICrowdinRequest.cs" />
+    <Compile Include="ICrowdinResponse.cs" />
+    <Compile Include="IProjectClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
