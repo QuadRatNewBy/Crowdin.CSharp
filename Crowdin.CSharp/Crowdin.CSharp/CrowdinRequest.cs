@@ -83,6 +83,16 @@
             return this;
         }
 
+        public ICrowdinRequest BodyNotNull(string key, object value)
+        {
+            if (value != null)
+            {
+                this.body.Add(new KeyValuePair<string, object>(key, value));
+            }
+
+            return this;
+        }
+
         public ICrowdinRequest Files(string name, string path, bool condition = true)
         {
             if (condition)
@@ -121,11 +131,6 @@
 
         private byte[] GenerateBody()
         {
-            if (this.files.Count == 0)
-            {
-                return this.GenerateJsonBody();
-            }
-
             return this.GenerateFileBody();
         }
 
@@ -195,14 +200,30 @@
                 var boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
                 var formdataTemplate = "\r\n--" + boundary
                                        + "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
+                var formdataArrayTemplate = "\r\n--" + boundary
+                                       + "\r\nContent-Disposition: form-data; name=\"{0}[]\";\r\n\r\n{1}";
                 const string FileHeaderTemplate =
                     "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n Content-Type: application/octet-stream\r\n\r\n";
 
                 foreach (var keyValuePair in this.body)
                 {
-                    var formitem = string.Format(formdataTemplate, keyValuePair.Key, keyValuePair.Value);
-                    var formitembytes = Encoding.UTF8.GetBytes(formitem);
-                    memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                    var ienum = keyValuePair.Value as IEnumerable;
+
+                    if (keyValuePair.Value.GetType() != typeof(string) && ienum != null)
+                    {
+                        foreach (var obj in ienum)
+                        {
+                            var formitem = string.Format(formdataArrayTemplate, keyValuePair.Key, obj);
+                            var formitembytes = Encoding.UTF8.GetBytes(formitem);
+                            memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                        }
+                    }                    
+                    else
+                    {
+                        var formitem = string.Format(formdataTemplate, keyValuePair.Key, keyValuePair.Value);
+                        var formitembytes = Encoding.UTF8.GetBytes(formitem);
+                        memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                    }
                 }
 
                 memoryStream.Write(boundarybytes, 0, boundarybytes.Length);
