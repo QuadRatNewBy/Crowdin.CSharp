@@ -12,7 +12,7 @@
     {
         private readonly IList<KeyValuePair<string, object>> body;
 
-        private readonly IList<KeyValuePair<string, string>> files;
+        private readonly IList<KeyValuePair<string, object>> files;
 
         private bool hasParams;
 
@@ -24,7 +24,7 @@
         {
             this.hasParams = false;
             this.body = new List<KeyValuePair<string, object>>();
-            this.files = new List<KeyValuePair<string, string>>();
+            this.files = new List<KeyValuePair<string, object>>();
 
             var urlParam = url.Split(new[] { '?' });
             var param = string.Join("?", urlParam.Skip(1)).Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
@@ -97,12 +97,25 @@
         {
             if (condition)
             {
-                this.files.Add(new KeyValuePair<string, string>(name, Path.GetFullPath(path)));
+                this.files.Add(new KeyValuePair<string, object>(name, Path.GetFullPath(path)));
             }
 
             return this;
         }
-        
+
+        public ICrowdinRequest Files(string name, IEnumerable<KeyValuePair<string, string>> pathAndNames, bool condition = true)
+        {
+            if (condition)
+            {
+                foreach (var keyValuePair in pathAndNames)
+                {
+                    this.files.Add(new KeyValuePair<string, object>(name, keyValuePair));
+                }
+            }
+
+            return this;
+        }
+
         public ICrowdinResponse Get()
         {
             var response = this.Send("GET");
@@ -214,9 +227,19 @@
                     {
                         foreach (var obj in ienum)
                         {
-                            var formitem = string.Format(formdataArrayTemplate, keyValuePair.Key, obj);
-                            var formitembytes = Encoding.UTF8.GetBytes(formitem);
-                            memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                            if (obj is KeyValuePair<string, object>)
+                            {
+                                var kvp = (KeyValuePair<string, object>)obj;
+                                var formitem = string.Format(formdataArrayTemplate, string.Format("{0}[{1}]", keyValuePair.Key, kvp.Key), kvp.Value);
+                                var formitembytes = Encoding.UTF8.GetBytes(formitem);
+                                memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                            }
+                            else
+                            {
+                                var formitem = string.Format(formdataArrayTemplate, keyValuePair.Key, obj);
+                                var formitembytes = Encoding.UTF8.GetBytes(formitem);
+                                memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                            }
                         }
                     }
                     else if (b != null)
@@ -237,11 +260,26 @@
 
                 foreach (var keyValuePair in this.files)
                 {
-                    var header = string.Format(FileHeaderTemplate, keyValuePair.Key, keyValuePair.Value);
+                    string key;
+                    string path;
+
+                    if (keyValuePair.Value is KeyValuePair<string, string>)
+                    {
+                        var kvp = (KeyValuePair<string, string>)keyValuePair.Value;
+                        key = string.Format("{0}[{1}]", keyValuePair.Key, kvp.Key);
+                        path = kvp.Value;
+                    }
+                    else
+                    {
+                        key = keyValuePair.Key;
+                        path = keyValuePair.Value.ToString();
+                    }
+
+                    var header = string.Format(FileHeaderTemplate, key, path);
                     var headerbytes = Encoding.UTF8.GetBytes(header);
                     memoryStream.Write(headerbytes, 0, headerbytes.Length);
 
-                    using (var fileStream = new FileStream(keyValuePair.Value, FileMode.Open, FileAccess.Read))
+                    using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
                         var buffer = new byte[1024];
                         int bytesRead;

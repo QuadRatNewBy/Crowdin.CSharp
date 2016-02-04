@@ -2,6 +2,8 @@
 
 namespace Crowdin.CSharp
 {
+    using System.Collections.Generic;
+
     internal interface ICrowdinRequest
     {
         ICrowdinRequest Placeholder(string placeholder, object value, bool condition = true);
@@ -13,6 +15,8 @@ namespace Crowdin.CSharp
         ICrowdinRequest BodyNotNull(string key, object value);
 
         ICrowdinRequest Files(string name, string path, bool condition = true);
+
+        ICrowdinRequest Files(string name, IEnumerable<KeyValuePair<string,string>> pathAndNames, bool condition = true);
 
         ICrowdinResponse Get();
 
