@@ -208,6 +208,7 @@
                 foreach (var keyValuePair in this.body)
                 {
                     var ienum = keyValuePair.Value as IEnumerable;
+                    var b = keyValuePair.Value as bool?;
 
                     if (keyValuePair.Value.GetType() != typeof(string) && ienum != null)
                     {
@@ -217,7 +218,13 @@
                             var formitembytes = Encoding.UTF8.GetBytes(formitem);
                             memoryStream.Write(formitembytes, 0, formitembytes.Length);
                         }
-                    }                    
+                    }
+                    else if (b != null)
+                    {
+                        var formitem = string.Format(formdataArrayTemplate, keyValuePair.Key, b.Value ? 1 : 0);
+                        var formitembytes = Encoding.UTF8.GetBytes(formitem);
+                        memoryStream.Write(formitembytes, 0, formitembytes.Length);
+                    }
                     else
                     {
                         var formitem = string.Format(formdataTemplate, keyValuePair.Key, keyValuePair.Value);

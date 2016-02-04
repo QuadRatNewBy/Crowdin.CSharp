@@ -45,6 +45,7 @@
     <Compile Include="CrowdinClient.cs" />
     <Compile Include="CrowdinHelperAccount.cs" />
     <Compile Include="CrowdinHelperAnonymous.cs" />
+    <Compile Include="CrowdinHelperProject.cs" />
     <Compile Include="CrowdinRequest.cs" />
     <Compile Include="CrowdinResponse.cs" />
     <Compile Include="CrowdinResponseType.cs" />
@@ -54,6 +55,11 @@
     <Compile Include="ICrowdinRequest.cs" />
     <Compile Include="ICrowdinResponse.cs" />
     <Compile Include="IProjectClient.cs" />
+    <Compile Include="IProjectEndpoint.cs" />
+    <Compile Include="IProjectGroupedClient.cs" />
+    <Compile Include="ProjectClient.cs" />
+    <Compile Include="ProjectEndpoint.cs" />
+    <Compile Include="ProjectGroupedClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

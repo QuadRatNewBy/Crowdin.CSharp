@@ -2,15 +2,13 @@
 {
     using System.Collections.Generic;
 
-    public interface IProjectClient
+    public interface IProjectEndpoint
     {
-        IProjectGroupedClient Grouped { get; }
+        ICrowdinResponse Delete(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null);
 
-        ICrowdinResponse DeleteProject(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null);
+        ICrowdinResponse Details(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null);
 
-        ICrowdinResponse ProjectDetails(CrowdinResponseType type = CrowdinResponseType.Xml, string callback = null);
-
-        ICrowdinResponse EditProject(
+        ICrowdinResponse Edit(
             string name = null,
             IEnumerable<string> languages = null,
             string joinPolicy = null,

@@ -10,7 +10,7 @@
 
         private readonly string accountKey;
 
-        public CrowdinHelperAccount(string userName, string accountKey)
+        internal CrowdinHelperAccount(string userName, string accountKey)
         {
             this.userName = userName;
             this.accountKey = accountKey;
@@ -21,8 +21,10 @@
             CrowdinResponseType type = CrowdinResponseType.Xml,
             string callback = null)
         {
-            var req = base.CreateRequest(url, type, callback).Placeholder(UserNamePlacaholder, this.userName)
-                .Placeholder(AccountKeyPlacaholder, this.accountKey);
+            var req =
+                base.CreateRequest(url, type, callback)
+                    .Placeholder(UserNamePlacaholder, this.userName)
+                    .Placeholder(AccountKeyPlacaholder, this.accountKey);
             return req;
         }
     }

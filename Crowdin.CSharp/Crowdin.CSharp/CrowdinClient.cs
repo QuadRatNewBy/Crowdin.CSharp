@@ -21,5 +21,15 @@
         {
             return new AccountClient(new CrowdinHelperAccount(userName, accountKey));
         }
+
+        public static IProjectGroupedClient CreateProjectGroupedClient(string projectIdentifier, string projectKey)
+        {
+            return new ProjectGroupedClient(new CrowdinHelperProject(projectIdentifier, projectKey));
+        }
+
+        public static IProjectClient CreateProjectClient(string projectIdentifier, string projectKey)
+        {
+            return new ProjectClient(CreateProjectGroupedClient(projectIdentifier, projectKey));
+        }
     }
 }
