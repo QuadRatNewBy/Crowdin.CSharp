@@ -10,9 +10,9 @@
         public void Start()
         {
             var pc = CrowdinClient.CreateProjectClient(Settings.ProjectIdentifier, Settings.ProjectKey);
-            var info = pc.ProjectDetails(CrowdinResponseType.Json);
-            var edit = pc.EditProject(logo: "Files/stitcher.png", type: CrowdinResponseType.Json);
-            var delete = pc.DeleteProject(CrowdinResponseType.Json);
+            var add = pc.AddDirectory("TestDir", type: CrowdinResponseType.Json);
+            var change = pc.ChangeDirectory("TestDir", "TestDirZ", "ImNotDir", type: CrowdinResponseType.Json);
+            var delete = pc.DeleteDirectory("TestDirZ", type: CrowdinResponseType.Json);
         }
     }
 }

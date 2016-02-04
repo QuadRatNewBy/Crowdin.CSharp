@@ -75,5 +75,36 @@
                 type,
                 callback);
         }
+
+        public ICrowdinResponse AddDirectory(
+            string name,
+            bool? isBranch = null,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null)
+        {
+            return this.Grouped.Directory.Add(name, isBranch, branch, type, callback);
+        }
+
+        public ICrowdinResponse ChangeDirectory(
+            string name,
+            string newName = null,
+            string title = null,
+            string exportPattern = null,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null)
+        {
+            return this.Grouped.Directory.Change(name, newName, title, exportPattern, branch, type, callback);
+        }
+
+        public ICrowdinResponse DeleteDirectory(
+            string name,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null)
+        {
+            return this.Grouped.Directory.Delete(name, branch, type, callback);
+        }
     }
 }

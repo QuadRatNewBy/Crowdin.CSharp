@@ -30,5 +30,28 @@
             string webhookProjectProofread = null,
             CrowdinResponseType type = CrowdinResponseType.Xml,
             string callback = null);
+
+
+        ICrowdinResponse AddDirectory(
+            string name,
+            bool? isBranch = null,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null);
+
+        ICrowdinResponse ChangeDirectory(
+            string name,
+            string newName = null,
+            string title = null,
+            string exportPattern = null,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null);
+
+        ICrowdinResponse DeleteDirectory(
+            string name,
+            string branch = null,
+            CrowdinResponseType type = CrowdinResponseType.Xml,
+            string callback = null);
     }
 }

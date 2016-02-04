@@ -2,6 +2,8 @@
 {
     public interface IProjectGroupedClient
     {
-        IProjectEndpoint Project { get; } 
+        IProjectEndpoint Project { get; }
+
+        IDirectoryEndpoint Directory { get; }
     }
 }

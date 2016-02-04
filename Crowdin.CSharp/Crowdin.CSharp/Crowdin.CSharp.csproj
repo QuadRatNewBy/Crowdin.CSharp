@@ -49,11 +49,13 @@
     <Compile Include="CrowdinRequest.cs" />
     <Compile Include="CrowdinResponse.cs" />
     <Compile Include="CrowdinResponseType.cs" />
+    <Compile Include="DirectoryEndpoint.cs" />
     <Compile Include="IAccountClient.cs" />
     <Compile Include="IAnonymousClient.cs" />
     <Compile Include="ICrowdinHelper.cs" />
     <Compile Include="ICrowdinRequest.cs" />
     <Compile Include="ICrowdinResponse.cs" />
+    <Compile Include="IDirectoryEndpoint.cs" />
     <Compile Include="IProjectClient.cs" />
     <Compile Include="IProjectEndpoint.cs" />
     <Compile Include="IProjectGroupedClient.cs" />
