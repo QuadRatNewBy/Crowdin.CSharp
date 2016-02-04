@@ -1,5 +1,7 @@
 ﻿namespace Crowdin.CSharp
 {
+    using System.Collections.Generic;
+
     internal class AccountClient : IAccountClient
     {
         private const string AccountProjectsAddress = "https://api.crowdin.com/api/account/get-projects?account-key={account-key}&login={crowdin username}";
@@ -23,7 +25,7 @@
             string name,
             string identifier,
             string sourceLanguage,
-            string[] languages,
+            IEnumerable<string> languages,
             string joinPolicy,
             string languageAccessPolicy = null,
             bool? hideDuplicates = null,
